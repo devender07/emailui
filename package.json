@@ -1,5 +1,5 @@
 {
-  "name": "@dev/emailui",
+  "name": "emailui",
   "version": "0.0.1",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
