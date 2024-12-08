@@ -32,8 +32,19 @@ This is a collection of React components designed for creating email templates w
 | center    | boolean         | false     | Whether to center the content horizontally.         |
 | style     | CSSProperties   | {}        | Additional styles to apply to the container.        |
 
-### `Container` Component
+```ts
+const emailHtml = createHtml(
+    <Html>
+    <Head/>
+    <Body>
+     ....
+    </Body>
+    </Html>
+)
+```
 
+### `Container` Component
+    It is the parent wrapper for heading, paragraph, image, button, link
 **Props**
 
 | Name      | Type            | Default   | Description                                         |
@@ -42,6 +53,8 @@ This is a collection of React components designed for creating email templates w
 | style     | CSSProperties   | {}        | Additional styles to apply to the container.        |
 
 ### `Heading` Component
+
+    Parent wrapper - <Container>...</Container>
 
 **Props**
 
@@ -53,6 +66,8 @@ This is a collection of React components designed for creating email templates w
 
 ### `Paragraph` Component
 
+    Parent wrapper - <Container>...</Container>
+
 **Props**
 
 | Name      | Type            | Default   | Description                                         |
@@ -61,6 +76,8 @@ This is a collection of React components designed for creating email templates w
 | style     | CSSProperties   | {}        | Additional styles for the paragraph.                |
 
 ### `Button` Component
+
+    Parent wrapper - <Container>...</Container>
 
 **Props**
 
@@ -71,16 +88,10 @@ This is a collection of React components designed for creating email templates w
 | children  | ReactNode       | -         | The content inside the button.                      |
 | style     | CSSProperties   | {}        | Additional styles for the button.                   |
 
-### `Column` Component
 
-**Props**
+### `Divider` Component 
 
-| Name      | Type            | Default   | Description                                         |
-|-----------|-----------------|-----------|-----------------------------------------------------|
-| children  | ReactNode       | -         | The content to be wrapped inside the column.        |
-| style     | CSSProperties   | {}        | Additional styles for the column.                   |
-
-### `Divider` Component
+    Parent wrapper - <Container>...</Container>
 
 **Props**
 
@@ -91,6 +102,8 @@ This is a collection of React components designed for creating email templates w
 | thickness      | string    | '1px'      | The thickness of the divider line.                  |
 
 ### `Image` Component
+
+    Parent wrapper - <Container>...</Container>
 
 **Props**
 
@@ -104,6 +117,8 @@ This is a collection of React components designed for creating email templates w
 
 ### `Link` Component
 
+    Parent wrapper - <Container>...</Container>
+
 **Props**
 
 | Name      | Type            | Default   | Description                                         |
@@ -112,6 +127,28 @@ This is a collection of React components designed for creating email templates w
 | target    | string          | '_blank'  | The target for the link ('_blank', '_self', etc.).  |
 | children  | ReactNode       | -         | The content inside the link.                        |
 | style     | CSSProperties   | {}        | Additional styles for the link.                     |
+
+```ts
+const emailHtml = createHtml(
+    <Html>
+        <Head/>
+        <Body>
+            <Container>
+            <Heading>Hello Heading<Heading>
+            or
+            <Paragraph/>
+            or
+            <Button/>
+            or
+            <Image/>
+            or 
+            <Link/>
+            </Container>
+            or<Divider/>
+        </Body>
+    </Html>
+)
+```
 
 ### `Row` Component
 
@@ -122,6 +159,39 @@ This is a collection of React components designed for creating email templates w
 | children  | ReactNode   | -        | The content inside the row.                         |
 | responsive| boolean     | false    | Whether the row should be responsive (displayed as a single column on smaller screens). |
 
+### `Column` Component
+
+ Parent wrapper - <Row>...<Row>
+
+**Props**
+
+| Name      | Type            | Default   | Description                                         |
+|-----------|-----------------|-----------|-----------------------------------------------------|
+| children  | ReactNode       | -         | The content to be wrapped inside the column.        |
+| style     | CSSProperties   | {}        | Additional styles for the column.                   |
+
+
+```ts
+const emailHtml = createHtml(
+    <Html>
+        <Head/>
+        <Body>
+            <Container>
+                <Row>
+                    <Column>
+                        <Container>
+                            <Heading/>
+                            <Paragrph/>
+                        </Container>
+                    </Column>
+                <Row>
+            </Container>
+        </Body>
+    </Html>
+)
+```
+
+
 ### `createHtml` Function
 
 A utility function to render React components as static HTML strings.
@@ -129,4 +199,7 @@ A utility function to render React components as static HTML strings.
 **Usage**
 
 ```ts
-const htmlString = createHtml(<YourComponent />);
+const emailHtml = createHtml(<YourComponent />);
+
+<Preview emailHtml={emailHtml} />;
+
